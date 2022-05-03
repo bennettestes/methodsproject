@@ -1,33 +1,32 @@
-
-
 class Item:
 
     def __init__(self, Name, Price, ItemID, Stock, Category):
 
-    self.Name = Name
-    self.Price = Price
-    self.ItemID = ItemID
-    self.Stock = Stock
-    self.Category = Category
+        self.Name = Name
+        self.Price = Price
+        self.ItemID = ItemID
+        self.Stock = Stock
+        self.Category = Category
 
     
     def GetName(self):
     
-    return self.Name 
+        return self.Name 
     
     def GetPrice(self):
     
-    return self.Price
+        return self.Price
     
     def GetItemID(self):
     
-    return self.ItemID
+        return self.ItemID
     
     def GetStock(self):
     
-    return self.Stock
+        return self.Stock
     
     def GetCategory(self):
     
-    return self.Category
+        return self.Category
+
     

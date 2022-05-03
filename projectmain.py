@@ -1,13 +1,30 @@
 import customer
 import store
+import Inventory
 
 currentuser = store.store()
+
+def shop_menu():
+
+    inventory = Inventory.Inventory()
+
+    print("\n\nView Inventory - 1")
+    print("Add Item to Cart - 2")
+    print("Checkout - 3")
+    print("Go Back - 4")
+    print("Exit Program - 5")
+
+    userinput = input("Select an option [1/2/3/4/5]: ")
+
+    if userinput == "1":
+        inventory.ViewInventory()
+
 
 #function for the menu once logged in
 def store_menu():
     print("\nWelcome", str(currentuser.get_CurrentUser()), "\n")
 
-    print("Category Information - 1")
+    print("Shop - 1")
     print("Cart Information - 2")
     print("Order History - 3")
     print("Account - 4")
@@ -17,7 +34,7 @@ def store_menu():
     #Need to create functions for cat info, cart info, order history
     #They will be called here
     if userinput == '1':
-        return
+        shop_menu()
     
     elif userinput == '2':
         return
