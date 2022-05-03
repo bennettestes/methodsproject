@@ -116,7 +116,7 @@ def login_menu():
             print("Exiting Program...")
             exit()
         else:
-            print("Please enter [1/2/3]:")
+            userinput = input("Select an option [1/2/3]: ")
 
 
 
