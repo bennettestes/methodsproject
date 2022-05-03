@@ -41,6 +41,7 @@ def shop_menu():
 
 def cart_info_menu():
     shoppingCart = ShoppingCart.ShoppingCart()
+    inventory = Inventory.Inventory()
     while True:
         print("\nView Cart - 1")
         print("Remove Item from Cart - 2")
@@ -51,7 +52,11 @@ def cart_info_menu():
         if userinput == "1":
             shoppingCart.ViewCart(currentuser.get_CurrentUser())
         elif userinput == "2":
-            shoppingCart.removeItem()
+            itemIDinput = input("What is the item ID that you would like to remove? ")
+            if inventory.checkIfItemExists(itemIDinput) == True:
+                shoppingCart.removeItem(currentuser.get_CurrentUser(), itemIDinput)
+            else:
+                print("Item ID is not valid.\n")
         elif userinput == "3":
             shoppingCart.Checkout()
         elif userinput == "4":

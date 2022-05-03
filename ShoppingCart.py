@@ -77,7 +77,50 @@ class ShoppingCart:
 
         
     def removeItem(self, username, ItemID):
-        return
+        cartline = 0
+        with open("shoppingCarts.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                newline = ""
+                removed = False
+                skip = False
+                usernameCheck = True
+                if values[0] == username:
+                    newline += values[0] + ","
+
+                    for value in values:
+                        if value == ItemID:
+                            removed  = True
+                            skip = True
+                        else:
+                            if skip == False:
+                                if usernameCheck == False:
+                                    newline += value + ","
+                                else:
+                                    usernameCheck = False
+                            else:
+                                skip = False
+                    
+                    if removed == False:
+                        print("Item does not exist in your cart.\n")
+                        return
+                    else:
+                        newline = newline[0:len(newline)-2]+"\n"
+                        with open("shoppingCarts.txt", "w") as f1:
+                            f1.write("")
+                        with open("shoppingCarts.txt", "a") as f2:
+                            i = 0
+                            for line in lines:
+                                if i == cartline:
+                                    f2.write(newline)
+                                else:
+                                    f2.write(line)
+                                i+=1
+                        print("\nRemoved Item from cart\n")
+                else:
+                    cartline += 1
+
     def SetItemAmount(self, username, ItemID, Amount):
         return
     def GetItemAmount(self, username, ItemID):
