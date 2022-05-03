@@ -13,11 +13,10 @@ def shop_menu():
         print("\n\nView Inventory - 1")
         print("View Inventory by Category - 2")
         print("Add Item to Cart - 3")
-        print("Checkout - 4")
-        print("Go Back - 5")
-        print("Exit Program - 6")
+        print("Go Back - 4")
+        print("Exit Program - 5")
 
-        userinput = input("Select an option [1/2/3/4/5/6]: ")
+        userinput = input("Select an option [1/2/3/4/5]: ")
 
         if userinput == "1":
             inventory.ViewInventory()
@@ -34,10 +33,8 @@ def shop_menu():
             else:
                 print("Item does not exist.\n")
         elif userinput == "4":
-            return
-        elif userinput == "5":
             store_menu()
-        elif userinput == "6":
+        elif userinput == "5":
             exit()
         else:
             print("Not a valid input")
