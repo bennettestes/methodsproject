@@ -7,17 +7,31 @@ currentuser = store.store()
 def shop_menu():
 
     inventory = Inventory.Inventory()
+    while True:
+        print("\n\nView Inventory - 1")
+        print("View Inventory by Category - 2")
+        print("Add Item to Cart - 3")
+        print("Checkout - 4")
+        print("Go Back - 5")
+        print("Exit Program - 6")
 
-    print("\n\nView Inventory - 1")
-    print("Add Item to Cart - 2")
-    print("Checkout - 3")
-    print("Go Back - 4")
-    print("Exit Program - 5")
+        userinput = input("Select an option [1/2/3/4/5/6]: ")
 
-    userinput = input("Select an option [1/2/3/4/5]: ")
+        if userinput == "1":
+            inventory.ViewInventory()
+        elif userinput == "2":
+            inventory.ViewInventoryByCategory()
+        elif userinput == "3":
+            return
+        elif userinput == "4":
+            return
+        elif userinput == "5":
+            store_menu()
+        elif userinput == "6":
+            exit()
+        else:
+            print("Not a valid input")
 
-    if userinput == "1":
-        inventory.ViewInventory()
 
 
 #function for the menu once logged in
