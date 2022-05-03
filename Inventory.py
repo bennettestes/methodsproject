@@ -45,3 +45,22 @@ class Inventory:
 
             except:
                 print("Not a valid Category\n")
+
+    def checkIfItemExists(self, itemID):
+        with open("inventory.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                value = line.split(",")
+                if value[2] == itemID:
+                    return True
+            return False
+
+    def checkStock(self, itemID, amount):
+        with open("inventory.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                value = line.split(",")
+                if value[2] == itemID:
+                    if int(value[3]) >= int(amount):
+                        return True
+            return False

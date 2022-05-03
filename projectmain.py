@@ -1,12 +1,14 @@
 import customer
 import store
 import Inventory
+import ShoppingCart
 
 currentuser = store.store()
 
 def shop_menu():
 
     inventory = Inventory.Inventory()
+    shoppingCart = ShoppingCart.ShoppingCart()
     while True:
         print("\n\nView Inventory - 1")
         print("View Inventory by Category - 2")
@@ -22,7 +24,15 @@ def shop_menu():
         elif userinput == "2":
             inventory.ViewInventoryByCategory()
         elif userinput == "3":
-            return
+            itemIdInput = input("What is the Item ID of your item? ")
+            if inventory.checkIfItemExists(itemIdInput) == True:
+                amountInput = input("How much of this item do you want? ")
+                if inventory.checkStock(itemIdInput, amountInput) == True:
+                    shoppingCart.AddItem(currentuser.get_CurrentUser(),itemIdInput,amountInput)
+                else:
+                    print("Not enough stock available.\n")
+            else:
+                print("Item does not exist.\n")
         elif userinput == "4":
             return
         elif userinput == "5":
