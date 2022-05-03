@@ -1,3 +1,4 @@
+from optparse import Values
 import Item
 
 class Inventory:
@@ -64,3 +65,12 @@ class Inventory:
                     if int(value[3]) >= int(amount):
                         return True
             return False
+    
+    def getItemNameandPrice(self, itemID):
+        with open("inventory.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[2] == itemID:
+                    returnValues = [values[0], values[1]]
+                    return returnValues

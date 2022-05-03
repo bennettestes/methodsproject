@@ -1,11 +1,36 @@
-from hashlib import new
-from turtle import update
 import Item
 import Inventory
 import store
 
 class ShoppingCart:
     
+    def ViewCart(self, username):
+        inventory = Inventory.Inventory()
+        with open("shoppingCarts.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[0] == username:
+                    print("\n-------------"+username+"'s Cart-------------\n")
+                    name = True
+                    skip = False
+                    i = 0
+                    x = 0
+                    numItems = (len(values) - 2)/2
+                    for value in values:
+                        if name == False and x != numItems:
+                            if skip == False:
+                                returnValue = inventory.getItemNameandPrice(value)
+                                print("ItemID: " + value + " -- " + returnValue[0] + " Amount: " + values[i+1]+ " Price: " + "{:.2f}".format(float(returnValue[1])*float(values[i+1])) +"\n")
+                                skip = True
+                                x += 1
+                            else:
+                                skip = False
+                        else:
+                            name = False
+                        i+=1
+
+
 
     def AddItem(self, username, ItemID, Amount):
         cartline = 0

@@ -10,7 +10,7 @@ def shop_menu():
     inventory = Inventory.Inventory()
     shoppingCart = ShoppingCart.ShoppingCart()
     while True:
-        print("\n\nView Inventory - 1")
+        print("\nView Inventory - 1")
         print("View Inventory by Category - 2")
         print("Add Item to Cart - 3")
         print("Go Back - 4")
@@ -33,42 +33,64 @@ def shop_menu():
             else:
                 print("Item does not exist.\n")
         elif userinput == "4":
-            store_menu()
+            return
         elif userinput == "5":
             exit()
         else:
             print("Not a valid input")
 
+def cart_info_menu():
+    shoppingCart = ShoppingCart.ShoppingCart()
+    while True:
+        print("\nView Cart - 1")
+        print("Remove Item from Cart - 2")
+        print("Checkout - 3")
+        print("Go Back - 4")
+        userinput = input("Select an option [1/2/3/4/]: ")
+
+        if userinput == "1":
+            shoppingCart.ViewCart(currentuser.get_CurrentUser())
+        elif userinput == "2":
+            shoppingCart.removeItem()
+        elif userinput == "3":
+            shoppingCart.Checkout()
+        elif userinput == "4":
+            return
+        else:
+            print("Not a valid input")
 
 
 #function for the menu once logged in
 def store_menu():
-    print("\nWelcome", str(currentuser.get_CurrentUser()), "\n")
+    while True:
+        print("\nWelcome", str(currentuser.get_CurrentUser()), "\n")
 
-    print("Shop - 1")
-    print("Cart Information - 2")
-    print("Order History - 3")
-    print("Account - 4")
-    print("Exit Program - 5")
+        print("Shop - 1")
+        print("Cart Information - 2")
+        print("Order History - 3")
+        print("Account - 4")
+        print("Exit Program - 5")
 
-    userinput = input("Select an option [1/2/3/4/5]: ")
-    #Need to create functions for cat info, cart info, order history
-    #They will be called here
-    if userinput == '1':
-        shop_menu()
-    
-    elif userinput == '2':
-        return
+        userinput = input("Select an option [1/2/3/4/5]: ")
+        #Need to create functions for cat info, cart info, order history
+        #They will be called here
+        if userinput == '1':
+            shop_menu()
+        
+        elif userinput == '2':
+            cart_info_menu()
 
-    elif userinput == '3':
-        currentuser.ViewOrderHistory()
+        elif userinput == '3':
+            currentuser.ViewOrderHistory()
 
-    elif userinput == '4':
-        account_menu()
+        elif userinput == '4':
+            account_menu()
 
-    elif userinput == '5':
-        print("Exiting program...")
-        exit()
+        elif userinput == '5':
+            print("Exiting program...")
+            exit()
+        else:
+            print("Not a valid input")
 
 
 
