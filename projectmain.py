@@ -23,7 +23,7 @@ def store_menu():
         return
 
     elif userinput == '3':
-        return
+        currentuser.ViewOrderHistory()
 
     elif userinput == '4':
         account_menu()
