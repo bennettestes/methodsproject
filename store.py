@@ -2,6 +2,9 @@ import customer
 
 class store:
 
+    def __init__(self, Currentuser = None):
+        self.CurrentUser = Currentuser
+
     def set_CurrentUser(self, currentuser):
         self.CurrentUser = currentuser
 
@@ -30,7 +33,7 @@ class store:
             print(self.OrderHistory[x])    
 
 
-    def Login():
+    def Login(self):
         username = input("Enter username: ")
 
         with open("customer.txt", 'r') as f:
@@ -44,9 +47,8 @@ class store:
                     if currentline[2] == username:
                         password = input("Enter Password: ")
                         if currentline[3] == password:
-                            current_user = store()
-                            current_user.set_CurrentUser(username)
-                            return current_user
+                            self.CurrentUser = username
+                            return
                 
                         else: 
                             print("Incorrect Username or Password. ")

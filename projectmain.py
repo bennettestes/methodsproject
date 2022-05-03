@@ -73,7 +73,8 @@ def login_menu():
     while(True):
         if userinput == '1':
             #calls login() method and sets current user as the new logged in user
-                currentuser.set_CurrentUser(store.store.Login())
+                currentuser.Login()
+                #currentuser.set_CurrentUser(store.store.Login())
                 #if Login() returned "", restart the loop
                 if currentuser.get_CurrentUser() == "":
                     print()
