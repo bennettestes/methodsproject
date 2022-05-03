@@ -20,6 +20,10 @@ class store:
         newcustomer.set_Password(Password)
         newcustomer.set_ShippingAddress(ShippingAddress)
         newcustomer.set_CardNumber(CardNumber)
+
+        with open("shoppingCarts.txt", "a") as f:
+            f.write("\n" + UserName + ",\n")
+
         return newcustomer
 
     def AddOrderHistory(self, orderHistory):
