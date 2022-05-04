@@ -74,3 +74,34 @@ class Inventory:
                 if values[2] == itemID:
                     returnValues = [values[0], values[1]]
                     return returnValues
+
+    def SubtractItemStock(self, itemID, amount):
+        itemLine = 0
+        with open("inventory.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[2] ==itemID:
+                    newValue = str(int(values[3])-int(amount))
+                    newLine = ""
+                    i = 0
+                    for value in values:
+                        if i == 3:
+                            newLine += newValue + ","
+                        else:
+                            newLine += value + ","
+                        i+=1
+                    newLine = newLine[0:len(newLine)-2]+"\n"
+                    with open("inventory.txt", "w") as f1:
+                        f1.write("")
+                    with open("inventory.txt", "a") as f2:
+                        i = 0
+                        for line in lines:
+                            if i == itemLine:
+                                f2.write(newLine)
+                            else:
+                                f2.write(line)
+                            i+=1
+                else:
+                    itemLine += 1
+                

@@ -22,7 +22,10 @@ class store:
         newcustomer.set_CardNumber(CardNumber)
 
         with open("shoppingCarts.txt", "a") as f:
-            f.write("\n" + UserName + ",\n")
+            f.write(UserName + ",\n")
+
+        with open("orderHistory.txt", "a") as f:
+            f.write(UserName + ",\n")
 
         return newcustomer
 

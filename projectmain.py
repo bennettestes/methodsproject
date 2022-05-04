@@ -58,7 +58,7 @@ def cart_info_menu():
             else:
                 print("Item ID is not valid.\n")
         elif userinput == "3":
-            shoppingCart.Checkout()
+            shoppingCart.Checkout(currentuser.get_CurrentUser())
         elif userinput == "4":
             return
         else:

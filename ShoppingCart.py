@@ -121,9 +121,65 @@ class ShoppingCart:
                 else:
                     cartline += 1
 
-    def SetItemAmount(self, username, ItemID, Amount):
-        return
-    def GetItemAmount(self, username, ItemID):
-        return
     def Checkout(self, username):
-        return
+        inventory = Inventory.Inventory()
+        cart = ""
+        with open("shoppingCarts.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[0] == username:
+                    cart += line
+                    skip = False
+                    i = 0
+                    x = 0
+                    numItems = (len(values)-2)/2
+                    for value in values:
+                        if value != username and skip == False and x != numItems:
+                            inventory.SubtractItemStock(value, values[i+1])
+                            skip = True
+                            x+=1
+                        else:
+                            skip = False
+                        i+=1
+        
+        with open("orderHistory.txt", "r") as f:
+            userLine = 0
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[0] == username:
+                    newLine = line[0:len(line)-1] + cart
+                    newLine = newLine[0:len(newLine)-1]+"\n"
+                    with open("orderHistory.txt", "w") as f1:
+                        f1.write("")
+                    with open("orderHistory.txt", "a") as f2:
+                        i = 0
+                        for line in lines:
+                            if i == userLine:
+                                f2.write(newLine)
+                            else:
+                                f2.write(line)
+                            i+=1
+                else:
+                    userLine += 1
+        
+        cartLine = 0
+        with open("shoppingCarts.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[0] == username:
+                    with open("shoppingCarts.txt", "w") as f1:
+                        f1.write("")
+                    with open("shoppingCarts.txt", "a") as f2:
+                        i = 0
+                        for line in lines:
+                            if i == cartLine:
+                                f2.write(username+",\n")
+                            else:
+                                f2.write(line)
+                            i+=1
+                else:
+                    cartLine += 1
+        print("Checkout Complete")
