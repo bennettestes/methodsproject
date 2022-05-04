@@ -103,25 +103,34 @@ def store_menu():
 
 #function for menu when account is selected
 def account_menu():
-    print("-------", currentuser.get_CurrentUser(), " Account-------")
-    print("Edit Shipping Information - 1")
-    print("Edit Payment Information - 2")
-    print("Delete Account - 3")
-    print("Logout - 4")
-    userinput = input("Select an option [1/2/3/4]: ")
-    if userinput == '1':
-        return
-    
-    elif userinput == '2':
-        return
+    customerOBJ = customer.customer()
+    while True:
+        print("-------", currentuser.get_CurrentUser(), " Account-------")
+        print("Edit Shipping Information - 1")
+        print("Edit Payment Information - 2")
+        print("Delete Account - 3")
+        print("Logout - 4")
+        userinput = input("Select an option [1/2/3/4]: ")
+        if userinput == '1':
+            shippingInput = input("What is your new Shipping Address? ")
+            customerOBJ.set_ShippingAddress(currentuser.get_CurrentUser(), shippingInput)
+        
+        elif userinput == '2':
+            cardInput = input("What is your new Card Number? ")
+            customerOBJ.set_CardNumber(currentuser.get_CurrentUser(), cardInput)
 
-    elif userinput == '3':
-        return
+        elif userinput == '3':
+            if customerOBJ.DeleteAccount(currentuser.get_CurrentUser()) == True:
+                login_menu()
+            else:
+                store_menu()
 
-    elif userinput == '4':
-        print("Logging out...")
-        print("Returning to the main menu...\n")
-        login_menu()
+        elif userinput == '4':
+            print("Logging out...")
+            print("Returning to the main menu...\n")
+            login_menu()
+        else:
+            print("Not a valid input")
 
  
 
@@ -161,19 +170,15 @@ def login_menu():
             shippingaddress = str(input("Enter a shipping address: "))
             cardnumber = str(input("Enter a card number: "))
 
-            #created new customer and calling createaccount method
-            new_customer = customer.customer()
-            new_customer = store.store.CreateAccount(first, last, username, password, shippingaddress, cardnumber)
-
             #creating a string with customer info seperated by commas
-            tofile = (str(new_customer.get_FirstName()) + "," + str(new_customer.get_LastName()) + "," + str(new_customer.get_Username()) + "," + str(new_customer.get_Password())
-                    + "," + str(new_customer.get_ShippingAddress()) + "," + str(new_customer.get_CardNumber()) + "\n")
+            tofile = (first + "," + last + "," + username + "," + password
+                    + "," + shippingaddress + "," + cardnumber + ",\n")
 
             #writing string to customer file
             write_file("customer.txt", tofile)
 
             #setting current user as the customer
-            currentuser.set_CurrentUser(str(new_customer.get_Username()))
+            currentuser.set_CurrentUser(username)
             print("Account Created. Logged in as " + currentuser.get_CurrentUser() + '\n')
             #calling store_menu to go to the menu as the new logged in customer
             store_menu()

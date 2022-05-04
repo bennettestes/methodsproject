@@ -1,4 +1,5 @@
 import Inventory
+import store
 
 
 class customer:
@@ -17,15 +18,70 @@ class customer:
         return self.LastName
 
 
-    def set_ShippingAddress(self, shippingaddress):
-        self.ShippingAddress = shippingaddress
+    def set_ShippingAddress(self, username, shippingaddress):
+        userLine = 0
+
+        with open("customer.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[2] == username:
+                    newLine = ""
+                    i = 0
+                    for value in values:
+                        if i == 4:
+                            newLine += shippingaddress + ","
+                        else:
+                            newLine += value + ","
+                        i+=1
+                    newLine = newLine[0:len(newLine)-2]+"\n"
+                    with open("customer.txt", "w") as f1:
+                        f1.write("")
+                    with open("customer.txt", "a") as f2:
+                        i = 0
+                        for line in lines:
+                            if i == userLine:
+                                f2.write(newLine)
+                            else:
+                                f2.write(line)
+                            i+=1
+                else:
+                    userLine += 1
+        
 
     def get_ShippingAddress(self):
         return self.ShippingAddress
 
 
-    def set_CardNumber(self, card):
-        self.CardNumber = card
+    def set_CardNumber(self, username, card):
+        userLine = 0
+
+        with open("customer.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[2] == username:
+                    newLine = ""
+                    i = 0
+                    for value in values:
+                        if i == 5:
+                            newLine += card + ","
+                        else:
+                            newLine += value + ","
+                        i+=1
+                    newLine = newLine[0:len(newLine)-2]+"\n"
+                    with open("customer.txt", "w") as f1:
+                        f1.write("")
+                    with open("customer.txt", "a") as f2:
+                        i = 0
+                        for line in lines:
+                            if i == userLine:
+                                f2.write(newLine)
+                            else:
+                                f2.write(line)
+                            i+=1
+                else:
+                    userLine += 1
 
     def get_CardNumber(self):
         return self.CardNumber
@@ -76,11 +132,31 @@ class customer:
                                 moveOn = True
                                 donePrinting = True
 
-    def DeleteAccount(self):
-        choice = input("Are you sure you want to delete your account? [Y/n]: ")
+    def DeleteAccount(self, username):
+        choice = input("Are you sure you want to delete your account? [y/n]: ")
         if choice == "n":
-            return
-        elif choice == "Y":
-            del self
+            return False
+        elif choice == "y":
+            userLine = 0
+
+            with open("customer.txt", "r") as f:
+                done = False
+                lines = f.readlines()
+                for line in lines:
+                    values = line.split(",")
+                    if values[2] == username:
+                        with open("customer.txt", "w") as f1:
+                            f1.write("")
+                        with open("customer.txt", "a") as f2:
+                            i = 0
+                            for line in lines:
+                                if i == userLine:
+                                    done = True
+                                else:
+                                    f2.write(line)
+                                i+=1
+                    else:
+                        userLine += 1
+            return True
         else:
-            print("Please enter [Y/n].")
+            print("Please enter [y/n].")

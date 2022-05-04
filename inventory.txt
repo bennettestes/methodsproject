@@ -1,5 +1,5 @@
-Apple,1.00,001,25,Fruit,
-Orange,1.00,002,19,Fruit,
-Chicken,5.00,003,15,Meat,
+Apple,1.00,001,9,Fruit,
+Orange,1.00,002,11,Fruit,
+Chicken,5.00,003,13,Meat,
 Cookies,3.25,004,20,Snacks/Dessert,
 Bread,2.75,005,22,Baked Goods,
