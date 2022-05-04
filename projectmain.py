@@ -177,6 +177,12 @@ def login_menu():
             #writing string to customer file
             write_file("customer.txt", tofile)
 
+            with open("shoppingCarts.txt", "a") as f:
+                f.write(username + ",\n")
+
+            with open("orderHistory.txt", "a") as f:
+                f.write(username + ",\n")
+
             #setting current user as the customer
             currentuser.set_CurrentUser(username)
             print("Account Created. Logged in as " + currentuser.get_CurrentUser() + '\n')

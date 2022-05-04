@@ -157,6 +157,48 @@ class customer:
                                 i+=1
                     else:
                         userLine += 1
+
+            userLine = 0
+
+            with open("shoppingCarts.txt", "r") as f:
+                done = False
+                lines = f.readlines()
+                for line in lines:
+                    values = line.split(",")
+                    if values[0] == username:
+                        with open("shoppingCarts.txt", "w") as f1:
+                            f1.write("")
+                        with open("shoppingCarts.txt", "a") as f2:
+                            i = 0
+                            for line in lines:
+                                if i == userLine:
+                                    done = True
+                                else:
+                                    f2.write(line)
+                                i+=1
+                    else:
+                        userLine += 1
+
+            userLine = 0
+
+            with open("orderHistory.txt", "r") as f:
+                done = False
+                lines = f.readlines()
+                for line in lines:
+                    values = line.split(",")
+                    if values[0] == username:
+                        with open("orderHistory.txt", "w") as f1:
+                            f1.write("")
+                        with open("orderHistory.txt", "a") as f2:
+                            i = 0
+                            for line in lines:
+                                if i == userLine:
+                                    done = True
+                                else:
+                                    f2.write(line)
+                                i+=1
+                    else:
+                        userLine += 1
             return True
         else:
             print("Please enter [y/n].")
