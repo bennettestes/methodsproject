@@ -1,3 +1,6 @@
+import Inventory
+
+
 class customer:
 
     def set_FirstName(self, first):
@@ -41,16 +44,37 @@ class customer:
     def get_Username(self):
         return self.Username
 
-
-    def AddOrderHistory(self, orderHistory):
-        self.OrderHistory = []
-        self.OrderHistory.append(orderHistory)
-
     
-    def ViewOrderHistory(self):
-        print("Showing Order History...\n")
-        for x in range(len(self.OrderHistory)):
-            print(self.OrderHistory[x])
+    def ViewOrderHistory(self, username):
+        inventory = Inventory.Inventory()
+        firstLoop = True
+        print("-------------"+username+ "'s Order History-------------\n")
+        with open("orderHistory.txt", "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                values = line.split(",")
+                if values[0] == username:
+                    orderNum = 1
+                    donePrinting = False
+                    valueNum = 0
+                    x = 1
+                    while donePrinting == False:
+                        i=1
+                        print("Order "+str(orderNum)+": \n")
+                        orderNum += 1
+                        moveOn = False
+                        while moveOn == False:
+                            if x+i != len(values)-1:
+                                if values[x+i] != username:
+                                    returnValue = inventory.getItemNameandPrice(values[x+i])
+                                    print("ItemID: " + values[x+i] + " -- " + returnValue[0] + " Amount: " + values[x+i+1]+ " Price: " + "{:.2f}".format(float(returnValue[1])*float(values[x+i+1])) +"\n")
+                                    i+=2
+                                else:
+                                    moveOn = True
+                                    x+=i
+                            else:
+                                moveOn = True
+                                donePrinting = True
 
     def DeleteAccount(self):
         choice = input("Are you sure you want to delete your account? [Y/n]: ")

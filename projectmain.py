@@ -67,6 +67,7 @@ def cart_info_menu():
 
 #function for the menu once logged in
 def store_menu():
+    customerOBJ = customer.customer()
     while True:
         print("\nWelcome", str(currentuser.get_CurrentUser()), "\n")
 
@@ -86,7 +87,7 @@ def store_menu():
             cart_info_menu()
 
         elif userinput == '3':
-            currentuser.ViewOrderHistory()
+            customerOBJ.ViewOrderHistory(currentuser.get_CurrentUser())
 
         elif userinput == '4':
             account_menu()

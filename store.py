@@ -29,16 +29,6 @@ class store:
 
         return newcustomer
 
-    def AddOrderHistory(self, orderHistory):
-        self.OrderHistory = []
-        self.OrderHistory.append(orderHistory)
-
-    
-    def ViewOrderHistory(self):
-        print("Showing Order History...\n")
-        for x in range(len(self.OrderHistory)):
-            print(self.OrderHistory[x])    
-
 
     def Login(self):
         username = input("Enter username: ")
